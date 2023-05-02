@@ -1,0 +1,17 @@
+.search_widgets{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+    padding: 7px 15px;
+    border: 1px solid #fde4e4;
+    border-radius: 5px;
+    cursor: pointer;
+    margin:16px;
+}
+.search_widgets input{
+    border: none;
+}
+.search_widgets input:focus{
+    outline: none;
+}
