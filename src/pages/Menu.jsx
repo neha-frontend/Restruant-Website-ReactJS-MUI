@@ -15,10 +15,14 @@ import "../styles/MenuStyles.css";
 const Menu = () => {
   const [searchValue,setSearchValue] = useState("");
   const [menuList , setMenuList] =  useState(MenuList);
+  const filteredMenuList = menuList.filter((item) => {
+    if (searchValue === "") return item;
+    if (item.name.toLowerCase().includes(searchValue.toLowerCase())) return item;
+  });
   return (
     <Layout>
       <Grid container>
-        <Grid item xs={6}>
+        <Grid item md={3} sm={6}>
           <div className="search_widgets">
             <input
               type="text"
@@ -30,31 +34,30 @@ const Menu = () => {
           </div>
         </Grid>
       </Grid>
-      <Grid container>
-        {menuList.filter((item)=>{
-          if (searchValue.value==="") return item;
-          if (item.name.toLowerCase().includes(searchValue.toLowerCase())) return item;
-        }).map((item)=>(
-         <Grid item lg={3} md={4} sm={6}>
-           <Card sx={{m: 2 }}>
-          <CardActionArea>
-            <CardMedia
-              sx={{ minHeight: "280px" }}
-              component={"img"}
-              src={item.image}
-              alt={item.name}
-            />
-            <CardContent>
-              <Typography variant="h5" gutterBottom component={"div"}>
-                {item.name}
-              </Typography>
-              <Typography variant="body2">{item.description}</Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
+      {filteredMenuList.length === 0 ? (<Typography variant="h4" component="div" className="no_data_found">No Item Found</Typography>) : (
+        <Grid container>
+        {filteredMenuList.map((item)=>(
+          <Grid item lg={3} md={4} sm={6}>
+            <Card sx={{m: 2 }}>
+           <CardActionArea>
+             <CardMedia
+               sx={{ height: "280px" }}
+               component={"img"}
+               src={item.image}
+               alt={item.name}
+             />
+             <CardContent>
+               <Typography variant="h5" gutterBottom component={"div"}>
+                 {item.name}
+               </Typography>
+               <Typography variant="body2">{item.description}</Typography>
+             </CardContent>
+           </CardActionArea>
+         </Card>
+          </Grid>
+         ))}
          </Grid>
-        ))}
-      </Grid>
+      )}
     </Layout>
   );
 };

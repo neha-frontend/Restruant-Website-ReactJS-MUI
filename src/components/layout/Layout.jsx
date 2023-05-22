@@ -7,7 +7,7 @@ const Layout = ({children}) => {
   return (
    <div>
     <Header/>
-     <Box sx={{minHeight:"calc(100vh - 90px)",display:"flex",flexDirection:"column"}}>
+     <Box sx={{minHeight:"calc(100vh - 256px)",display:"flex",flexDirection:"column",position:"relative"}}>
       {children}
     </Box>
     <Footer/>
